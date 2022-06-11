@@ -1,22 +1,20 @@
 import React from "react";
-import { Route, Routes, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import "./App.css";
-import Counter from "./Counter";
-import Hello from "./Hello";
+import "./css/index.css";
+import Gallery from "./pages/Gallery";
+import ImageEditor from "./pages/ImageEditor";
 
-function App() {
-  return (
-    <div className="App">    
-      <h1>General header</h1>
-      <Link to="/">Home</Link>
-      <Link to="/hello">Hello</Link>
-      <Routes>
-        <Route path="/"  element={<Counter />} />
-        <Route path="/hello"  element={<Hello />} />
-      </Routes>
-    </div>
+export default function App(){
+  return(
+    
+    <Routes>
+      <Route path="/" element={<Outlet />} >
+        <Route index element={<Gallery />} />          
+        <Route path=":id" element={<ImageEditor />} />          
+      </Route>
+    </Routes>
+    
   );
 }
-
-export default App;
