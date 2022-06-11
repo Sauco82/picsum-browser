@@ -12,14 +12,16 @@ function render(ui, renderOptions = {}){
   return originalRender(ui, {wrapper, store, ...renderOptions});
 }
 
-const renderWithRouter = (ui, history) => {
+const renderWithRouter = (ui, history, renderOptions) => {
   const wrapper = ({children}) => (
-    <Router location={history.location} navigator={history} >
-      {children}
-    </Router>
+    <Provider store={store}>
+      <Router location={history.location} navigator={history} >
+        {children}
+      </Router>
+    </Provider>
   );
 
-  return render(ui, {wrapper});
+  return originalRender(ui, {wrapper, store, ...renderOptions});
 };
 
 export * from "@testing-library/react";

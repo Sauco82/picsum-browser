@@ -1,10 +1,15 @@
 import React from "react";
 import { screen, renderWithRouter, render } from "../../test-utils";
 import {createMemoryHistory} from "history";
+import server from "../../api/mockServer";
 
 import App from "../../App";
 
 describe("Main App", ()=>{
+  beforeAll( () => server.listen() );
+  afterEach( () => server.resetHandlers() );
+  afterAll(  () => server.close() );
+
   it("renders gallery", async () => {
     const history = createMemoryHistory(),
           { getByText } = renderWithRouter(<App />, history );

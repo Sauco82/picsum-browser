@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 
 import "./css/index.css";
-import Gallery from "./pages/Gallery";
-import ImageEditor from "./pages/ImageEditor";
+import Gallery from "./pages/Gallery/Gallery";
+import ImageEditor from "./pages/ImageEditor/ImageEditor";
 
 export default function App(){
   return(
