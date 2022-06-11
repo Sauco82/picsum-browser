@@ -31,8 +31,10 @@ export const api = createApi({
         };
       }
     }),
-    // getPhoto: builder.query(),
+    getPhoto: builder.query({
+      query: (id) => `/id/${id}/info`
+    }),
   })
 });
 
-export const { useGetPhotosQuery } = api;
+export const { useGetPhotosQuery, useGetPhotoQuery } = api;

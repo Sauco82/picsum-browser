@@ -1,0 +1,1 @@
+https://overreacted.io/npm-audit-broken-by-design/

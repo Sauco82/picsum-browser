@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useGetPhotosQuery } from "../../api/api";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Skeleton from "./Skeleton";
 import Error from "../../components/Error";
 

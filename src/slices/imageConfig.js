@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  size: {
-    width:  600,
-    height: 400,
-  },
+const initialState = {  
+  width:     600,
+  height:    400,
   grayscale: "false",
   blur:      1,
 };
@@ -14,7 +12,7 @@ export const imageConfigSlice = createSlice({
   initialState,  
   reducers: {
     updateWidth: (state, {payload: width}) => {
-      state.size.width = width;
+      state.width = width;
     },    
   },  
 });
