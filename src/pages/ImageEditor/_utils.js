@@ -1,5 +1,4 @@
-export function imageSrc({
-  id,
+export function imageSrc(id,{  
   grayscale,
   blur,
   width,
@@ -14,4 +13,12 @@ export function imageSrc({
   if (blur) return `${url}?blur=${blur}`;
 
   return url;
+}
+
+
+export function removeFalsyKeys(obj){
+  return Object.keys(obj).filter(key => obj[key]).reduce((acc, key) => {
+    acc[key] = obj[key];
+    return acc;
+  }, {});
 }
