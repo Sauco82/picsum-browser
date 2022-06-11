@@ -1,22 +1,36 @@
+import { Link } from "react-router-dom";
+
 import { useGetPhotosQuery } from "../../api/api";
+import { useSearchParams, useParams } from "react-router-dom";
+import Skeleton from "./Skeleton";
+import Error from "../../components/Error";
 
 export default function Gallery(){
-  const {isLoading, data} = useGetPhotosQuery({page: 2, limit: 10});
+  const [searchParams] = useSearchParams(),
+        page = searchParams.get("page") || 1,
+        limit = searchParams.get("limit");  
 
-  console.log({isLoading, data});
+  const {isLoading, data} = useGetPhotosQuery({page, limit});
+
+  if (isLoading) return <Skeleton/>;
+  if (!data) return <Error/>;
+
+  const {photos, next, prev} = data;  
 
   return(
     <>
       <h1>Gallery</h1>
-
-      {isLoading ? 
-        <>isLoading...</>
-        :      
-        data?.photos.map( ({id}) => <img src={`https://picsum.photos/id/${id}/200/300`} />)
-      }
-
-      {data?.pagination?.next}
-      {data?.pagination?.prev}
+      {photos.map( ({id}) => (
+        <Link to={`/${id}`}>
+          <img src={`https://picsum.photos/id/${id}/200/300`} />
+        </Link>
+      ))}
+      <h1>
+        {prev && <Link to={`?page=${page - 1}`} >Prev</Link>}
+      </h1>
+      <h1>
+        {next && <Link to={`?page=${page + 1}`}>Next</Link>}
+      </h1>    
     </>
   );
 }

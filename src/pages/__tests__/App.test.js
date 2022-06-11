@@ -37,7 +37,7 @@ describe("Main App", ()=>{
     
     history.push("/2");    
     renderWithRouter( <App />, history);
-    expect(screen.getByText(/Image editor 2/i)).toBeInTheDocument();              
+    expect(screen.getByText(/Image editor 2/i)).toBeInTheDocument();    
   });
 });
 
