@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { useImageConfig, useSyncUrl, useDebouncedImgSrc } from "./_hooks";
+import { useImageConfig, useSyncUrl } from "./_hooks";
 import { reset, init } from "../../slices/imageConfig";
 import Editor from "./Editor";
 import Header from "../../components/Header";
@@ -17,9 +17,7 @@ export default function ImageEditor(){
   useEffect(()=>{
     dispatch(init(imageConfig));
     return ()=>dispatch(reset());
-  },[]);
-
-  // const {data: photo, isLoading} = useGetPhotoQuery(id);
+  },[]);  
 
   return(
     <>

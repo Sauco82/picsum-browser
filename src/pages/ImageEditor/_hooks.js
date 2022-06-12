@@ -48,17 +48,20 @@ export const useSyncUrl = ()=>{
 export const useDebouncedImgSrc = ()=>{
   const {id} = useParams(),
         config = useImageConfig(),
-        [ src, setSrc ]= useState(imageSrc(id, config));
+        [ src, setSrc ]= useState(imageSrc(id, config)),
+        [ isChanging, setIsChanging ] = useState(false);
 
   const changeSrc = useMemo( ()=>(
     debounce (config=>{         
       setSrc(imageSrc(id, config));
+      setIsChanging(false);
     },750)
   ), []);
 
   useEffect(()=>{
     changeSrc(config);
+    setIsChanging(true);
   },[config]);
 
-  return src;
+  return {src, isChanging};
 };
