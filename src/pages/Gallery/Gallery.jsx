@@ -28,7 +28,10 @@ export default function Gallery(){
           {photos.map( ({id, author}) => (
             <div className="g-col-4" key={id}>
               <Link to={`/${id}`}>
-                <img src={`https://picsum.photos/id/${id}/300/400`} />
+                <picture>
+                  <source srcSet={`https://picsum.photos/id/${id}/300/400.webp`} loading="lazy" />
+                  <img src={`https://picsum.photos/id/${id}/300/400`} loading="lazy" />
+                </picture>
                 <p>by {author}</p>
               </Link>
             </div>
