@@ -1,16 +1,15 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import Image from "./Image";
-import Editor from "./Editor";
 import { useImageConfig, useSyncUrl, useDebouncedImgSrc } from "./_hooks";
 import { reset, init } from "../../slices/imageConfig";
+import Editor from "./Editor";
+import Header from "../../components/Header";
+import ImageContainer from "./ImageContainer";
+import styles from "./ImageEditor.module.css";
 
 export default function ImageEditor(){
-  const {id} = useParams(),        
-        imageConfig = useImageConfig(),  
-        src = useDebouncedImgSrc(),
+  const imageConfig = useImageConfig(),          
         dispatch = useDispatch();  
   
   useSyncUrl();
@@ -24,9 +23,11 @@ export default function ImageEditor(){
 
   return(
     <>
-      <h1>Image editor {id}</h1>      
-      <Image src={src}  />
-      <Editor />
+      <Header fullScreen={true}/>      
+      <div className={styles.image_editor}>
+        <ImageContainer />        
+        <Editor />
+      </div>
     </>
   );
 

@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 
 
 import { useImageConfig } from "./_hooks";
+import styles from "./ImageEditor.module.css";
 import { 
   updateWidth,
   updateHeight,
@@ -14,8 +15,8 @@ export default function Editor(){
         {width, height, blur, grayscale} = useImageConfig();
   
   return (
-    <div>
-      <label>
+    <div className={`${styles.editor}`}>
+      <label className="">
         Width
         <input 
           name="width"
