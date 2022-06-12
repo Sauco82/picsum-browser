@@ -18,10 +18,7 @@ export const api = createApi({
   baseQuery:   fetchBaseQuery({baseUrl: "https://picsum.photos/"}),
   endpoints:   builder => ({
     getPhotos: builder.query({
-      query:             ({page, limit}) => {
-        if (limit) return `/v2/list?page=${page}&limit=${limit}`;
-        return `/v2/list?page=${page}`;
-      },
+      query:             ({page}) => `/v2/list?page=${page}`,
       transformResponse: (response, meta) => {
         const nextPrev = parseLinkHeaders(meta?.response?.headers?.get("Link"));
         

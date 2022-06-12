@@ -1,3 +1,5 @@
+import { DEFAULT_IMAGE_CONFIG } from "./_consts";
+
 export function imageSrc(id,{  
   grayscale,
   blur,
@@ -6,7 +8,7 @@ export function imageSrc(id,{
 }={}) {
   if (!id) throw "Missing image ID";
 
-  let url = `https://picsum.photos/id/${id}/${width || 600}/${height || 400}`;
+  let url = `https://picsum.photos/id/${id}/${width || DEFAULT_IMAGE_CONFIG.width}/${height || DEFAULT_IMAGE_CONFIG.height}`;
   
   if (grayscale && blur) return `${url}?grayscale&blur=${blur}`;
   if (grayscale) return `${url}?grayscale`;

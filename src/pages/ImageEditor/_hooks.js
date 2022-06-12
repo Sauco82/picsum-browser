@@ -5,16 +5,17 @@ import { debounce, throttle } from "underscore";
 
 import { reset } from "../../slices/imageConfig";
 import { imageSrc, removeFalsyKeys } from "./_utils";
+import { DEFAULT_IMAGE_CONFIG } from "./_consts";
 
 export const useImageConfig = () => {
   const [searchParams] = useSearchParams(),
         imageConfig = useSelector(s=>s.imageConfig);
   
   const searchImageConfig = useMemo(()=>({
-    width:     searchParams.get("width") || 600,
-    height:    searchParams.get("height") || 400,
-    grayscale: searchParams.get("grayscale") || false,
-    blur:      searchParams.get("blur") || 0,
+    width:     searchParams.get("width")     || DEFAULT_IMAGE_CONFIG.width,
+    height:    searchParams.get("height")    || DEFAULT_IMAGE_CONFIG.height,
+    grayscale: searchParams.get("grayscale") || DEFAULT_IMAGE_CONFIG.grayscale,
+    blur:      searchParams.get("blur")      || DEFAULT_IMAGE_CONFIG.blur,
   }), []);
   
   if (imageConfig) return imageConfig;

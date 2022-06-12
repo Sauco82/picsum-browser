@@ -7,10 +7,9 @@ import Error from "../../components/Error";
 
 export default function Gallery(){
   const [searchParams] = useSearchParams(),
-        page = searchParams.get("page") || 1,
-        limit = searchParams.get("limit");  
+        page = searchParams.get("page") || 1;  
 
-  const {isLoading, data} = useGetPhotosQuery({page, limit});
+  const {isLoading, data} = useGetPhotosQuery({page});
 
   if (isLoading) return <Skeleton/>;
   if (!data) return <Error/>;
@@ -20,9 +19,12 @@ export default function Gallery(){
   return(
     <>
       <h1>Gallery</h1>
-      {photos.map( ({id}) => (
+      {photos.map( ({id, author}) => (
         <Link to={`/${id}`}>
-          <img src={`https://picsum.photos/id/${id}/200/300`} />
+          <div>
+            <img src={`https://picsum.photos/id/${id}/200/300`} />
+            <p>{author}</p>
+          </div>
         </Link>
       ))}
       <h1>
