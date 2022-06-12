@@ -1,43 +1,78 @@
 import React from "react";
-import { screen, renderWithRouter, render } from "../../test-utils";
-import {createMemoryHistory} from "history";
-import server from "../../api/mockServer";
+import userEvent from "@testing-library/user-event";
+import { fireEvent } from "@testing-library/react";
 
+import { screen, renderWithRouter, render, waitFor } from "../../test-utils";
+import {createMemoryHistory} from "history";
+import server, {photos1, photos2} from "../../api/mockServer";
 import App from "../../App";
 
-describe("Main App", ()=>{
+describe("As a user,", ()=>{
   beforeAll( () => server.listen() );
   afterEach( () => server.resetHandlers() );
   afterAll(  () => server.close() );
 
-  it("renders gallery", async () => {
+  it("I want to be able to search through the list of images.", async ()=>{
     const history = createMemoryHistory(),
-          { getByText } = renderWithRouter(<App />, history );
-  
-    expect(getByText(/Gallery/i)).toBeInTheDocument();  
-  });
-  
-  it("renders image", async ()=>{
-    const history = createMemoryHistory();
+          user = userEvent.setup();
     
-    history.push("/1");    
-    renderWithRouter( <App />, history);
-    expect(screen.getByText(/Image/i)).toBeInTheDocument();    
+    renderWithRouter(<App />, history );
+
+    // Initial load
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
+    
+    // First page
+    const nextLink = await screen.findByText(/Next/i);
+    expect(nextLink).toHaveAttribute("href");
+    expect(screen.getByText(photos1[2].author)).toBeInTheDocument();
+    expect(screen.queryAllByText(photos1[0].author)).toHaveLength(2);
+    expect(screen.queryByText(photos2[0].author)).not.toBeInTheDocument();    
+    expect(screen.queryAllByRole("img")).toHaveLength(3);    
+    await user.click(nextLink);
+
+    // Second page    
+    const prevLink = await screen.findByText(/Prev/i);  
+    expect(screen.queryByText(photos2[0].author)).toBeInTheDocument();
+    expect(screen.queryByText(photos2[1].author)).toBeInTheDocument();
+    expect(screen.queryByText(photos2[2].author)).toBeInTheDocument();
+    expect(screen.queryAllByRole("img")).toHaveLength(3);
   });
 
-  it("navigates", ()=>{
-    const history = createMemoryHistory();
-        
-    renderWithRouter( <App />, history);    
-    expect(screen.getByText(/Gallery/i)).toBeInTheDocument();  
+  it("I want to click an image and navigate to its editor",async ()=>{
+    const history = createMemoryHistory(),
+          user = userEvent.setup();
+
+    renderWithRouter(<App />, history );
     
-    history.push("/1");
-    renderWithRouter( <App />, history);    
-    expect(screen.getByText(/Image editor 1/i)).toBeInTheDocument();  
+    const [firstImage] = await screen.findAllByRole("img");
+    await user.click(firstImage);    
+    expect(screen.getAllByRole("slider")).toHaveLength(3);
+    expect(screen.getAllByRole("checkbox")).toHaveLength(1);
+    expect(screen.getByRole("img")).toHaveAttribute("src", `https://picsum.photos/id/${photos1[0].id}/600/400`);    
+  });
+  
+  it("I want to be able to edit image that I can download",async ()=>{
+    const history = createMemoryHistory(),
+          user = userEvent.setup();
     
-    history.push("/2");    
-    renderWithRouter( <App />, history);
-    expect(screen.getByText(/Image editor 2/i)).toBeInTheDocument();    
+    renderWithRouter(<App />, history );
+    
+    const [firstImage] = await screen.findAllByRole("img");
+    await user.click(firstImage);    
+    
+    const widthSlider = screen.getByLabelText("Width"),
+          heightSlider = screen.getByLabelText("Height"),
+          blurSlider = screen.getByLabelText("Blur"),
+          grayscaleCheck = screen.getByLabelText("Grayscale");
+
+    fireEvent.change(widthSlider, {target: {value: 900}});
+    fireEvent.change(heightSlider, {target: {value: 800}});
+    fireEvent.change(blurSlider, {target: {value: 3}});    
+    await user.click(grayscaleCheck);
+    
+    await waitFor(()=>{
+      expect(screen.getByRole("img")).toHaveAttribute("src", `https://picsum.photos/id/${photos1[0].id}/900/800?grayscale&blur=3`);      
+    });
   });
 });
 

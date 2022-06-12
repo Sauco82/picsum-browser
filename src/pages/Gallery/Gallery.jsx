@@ -20,7 +20,7 @@ export default function Gallery(){
     <>
       <h1>Gallery</h1>
       {photos.map( ({id, author}) => (
-        <Link to={`/${id}`}>
+        <Link to={`/${id}`} key={id}>
           <div>
             <img src={`https://picsum.photos/id/${id}/200/300`} />
             <p>{author}</p>
@@ -28,11 +28,11 @@ export default function Gallery(){
         </Link>
       ))}
       <h1>
-        {prev && <Link to={`?page=${page - 1}`} >Prev</Link>}
+        {prev && <Link to={`?page=${parseInt(page) - 1}`} >Prev</Link>}
       </h1>
       <h1>
-        {next && <Link to={`?page=${page + 1}`}>Next</Link>}
-      </h1>    
+        {next && <Link to={`?page=${parseInt(page) + 1}`}>Next</Link>}
+      </h1>
     </>
   );
 }

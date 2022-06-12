@@ -1,7 +1,7 @@
 import { render as originalRender } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
-import { Router } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 
 import { store } from "./store/store";
 
@@ -15,9 +15,9 @@ function render(ui, renderOptions = {}){
 const renderWithRouter = (ui, history, renderOptions) => {
   const wrapper = ({children}) => (
     <Provider store={store}>
-      <Router location={history.location} navigator={history} >
+      <MemoryRouter location={history.location} navigator={history} >
         {children}
-      </Router>
+      </MemoryRouter>
     </Provider>
   );
 
