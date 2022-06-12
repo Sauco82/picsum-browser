@@ -1,0 +1,25 @@
+@use "./variables" as variables;
+
+:root {
+  --spacer-1: #{variables.$spacer-1};
+  --spacer-2: #{variables.$spacer-2};
+  --spacer-3: #{variables.$spacer-3};
+  --spacer-4: #{variables.$spacer-4};
+  --spacer-5: #{variables.$spacer-5};
+  --blue: #{variables.$blue};
+  --black: #{variables.$black};
+  --green: #{variables.$green};
+  --gray: #{variables.$gray};    
+}
+
+body {
+  margin: 0;
+  font-family: Archia-Regular, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; 
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

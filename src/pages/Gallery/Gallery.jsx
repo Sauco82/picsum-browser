@@ -4,6 +4,7 @@ import { useGetPhotosQuery } from "../../api/api";
 import { useSearchParams } from "react-router-dom";
 import Skeleton from "./Skeleton";
 import Error from "../../components/Error";
+import Header from "../../components/Header";
 
 export default function Gallery(){
   const [searchParams] = useSearchParams(),
@@ -18,6 +19,7 @@ export default function Gallery(){
 
   return(
     <>
+      <Header/>
       <h1>Gallery</h1>
       {photos.map( ({id, author}) => (
         <Link to={`/${id}`} key={id}>

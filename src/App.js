@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 
-import "./css/index.css";
+import "./css/index.scss";
 import Gallery from "./pages/Gallery/Gallery";
 import ImageEditor from "./pages/ImageEditor/ImageEditor";
 

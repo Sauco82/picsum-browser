@@ -1,0 +1,76 @@
+@use "./variables" as variables;
+
+.container,
+.fullscreen-container {
+  width: 100%;
+  padding: 1rem;
+}
+
+.container {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+// Padding and margin
+// ======================================================
+// ======================================================
+$sizes: (0: 0,
+  1: variables.$spacer-1,
+  2: variables.$spacer-2,
+  3: variables.$spacer-3,
+  4: variables.$spacer-4,
+  5: variables.$spacer-5,
+);
+
+$directions: ("": "",
+  "-top": "t",
+  "-bottom": "b",
+  "-left": "l",
+  "-right": "r"
+);
+
+@mixin spacing-utils($type: "margin") {
+
+  @each $direction-key,
+  $direction in $directions {
+
+    @each $size-key,
+    $size in $sizes {
+
+      &#{$direction}-#{$size-key},
+      &#{$direction}_#{$size-key} {
+        #{$type}#{$direction-key}: $size !important
+      }
+    }
+  }
+}
+
+// Generates m-{sizes}, mt-{sizes}, mb-{sizes}, mr-{sizes}, ml-{sizes},
+// to handle margins of all sizes and directions,
+.m {
+  @include spacing-utils("margin");
+}
+
+// Generates p-{sizes}, pt-{sizes}, pb-{sizes}, pr-{sizes}, pl-{sizes},
+// to handle paddings of all sizes and directions,
+.p {
+  @include spacing-utils("padding");
+}
+
+// Grid
+// ======================================================
+// ======================================================
+.grid {
+  --column-gap: $spacer-1;
+  --row-gap:    $spacer-1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--column-gap);
+  row-gap: var(--row-gap);
+}
+
+@for $col-size from 1 through 12 {
+  .g-col-#{$col-size} {
+    grid-column: span #{$col-size};
+  }
+}

@@ -1,0 +1,148 @@
+
+// Flexbox utils
+// ======================================================
+// ======================================================
+.flex {
+  display: flex;
+}
+
+.dont_resize {
+  flex: 0 0 auto
+}
+
+.direction-row {
+  flex-direction: row;
+}
+
+.direction-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.direction-column {
+  flex-direction: column;
+}
+
+.direction-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.nowrap {
+  flex-wrap: nowrap;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+// Content utils
+// ======================================================
+.justify-start {
+  justify-content: flex-start
+}
+
+.justify-end {
+  justify-content: flex-end
+}
+
+.justify-center {
+  justify-content: center
+}
+
+.justify-between {
+  justify-content: space-between
+}
+
+.justify-around {
+  justify-content: space-around
+}
+
+.justify-evenly {
+  justify-content: space-evenly
+}
+
+// Children utils
+// ======================================================
+// ======================================================
+.justify-self-start {
+  justify-self: start;
+}
+
+.justify-self-end {
+  justify-self: end;
+}
+
+.justify-self-center {
+  justify-self: center;
+}
+
+.justify-self-stretch {
+  justify-self: stretch;
+}
+
+.align-self-start {
+  align-self: start;
+}
+
+.align-self-end {
+  align-self: end;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-stretch {
+  align-self: stretch;
+}
+
+.align-items-start {
+  align-items: flex-start
+}
+
+.align-items-end {
+  align-items: flex-end
+}
+
+.align-items-center {
+  align-items: center
+}
+
+.align-items-stretch {
+  align-items: stretch
+}
+
+.align-items-baseline {
+  align-items: baseline
+}
+
+.align-content-start {
+  align-content: flex-start
+}
+
+.align-content-end {
+  align-content: flex-end
+}
+
+.align-content-center {
+  align-content: center
+}
+
+.align-content-between {
+  align-content: space-between
+}
+
+.align-content-around {
+  align-content: space-around
+}
+
+.align-content-evenly {
+  align-content: space-evenly
+}
+
+.align-content-stretch {
+  align-content: stretch
+}

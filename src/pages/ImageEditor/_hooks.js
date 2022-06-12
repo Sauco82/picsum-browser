@@ -14,8 +14,8 @@ export const useImageConfig = () => {
   const searchImageConfig = useMemo(()=>({
     width:     searchParams.get("width")     || DEFAULT_IMAGE_CONFIG.width,
     height:    searchParams.get("height")    || DEFAULT_IMAGE_CONFIG.height,
-    grayscale: searchParams.get("grayscale") || DEFAULT_IMAGE_CONFIG.grayscale,
-    blur:      searchParams.get("blur")      || DEFAULT_IMAGE_CONFIG.blur,
+    blur:      searchParams.get("blur") || DEFAULT_IMAGE_CONFIG.blur,
+    grayscale: searchParams.get("grayscale") == "true" ? true : false,
   }), []);
   
   if (imageConfig) return imageConfig;

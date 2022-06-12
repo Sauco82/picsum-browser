@@ -12,7 +12,7 @@ import {
 export default function Editor(){
   const dispatch = useDispatch(),
         {width, height, blur, grayscale} = useImageConfig();
-
+  
   return (
     <div>
       <label>
