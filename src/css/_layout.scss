@@ -61,8 +61,8 @@ $directions: ("": "",
 // ======================================================
 // ======================================================
 .grid {
-  --column-gap: $spacer-1;
-  --row-gap:    $spacer-1;
+  --column-gap: #{variables.$spacer-1};
+  --row-gap:    #{variables.$spacer-1};
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: var(--column-gap);

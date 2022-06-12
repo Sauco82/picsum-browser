@@ -24,17 +24,17 @@ describe("As a user,", ()=>{
     // First page
     const nextLink = await screen.findByText(/Next/i);
     expect(nextLink).toHaveAttribute("href");
-    expect(screen.getByText(photos1[2].author)).toBeInTheDocument();
-    expect(screen.queryAllByText(photos1[0].author)).toHaveLength(2);
-    expect(screen.queryByText(photos2[0].author)).not.toBeInTheDocument();    
+    expect(screen.getByText(`by ${photos1[2].author}`)).toBeInTheDocument();
+    expect(screen.queryAllByText(`by ${photos1[0].author}`)).toHaveLength(2);
+    expect(screen.queryByText(`by ${photos2[0].author}`)).not.toBeInTheDocument();    
     expect(screen.queryAllByRole("img")).toHaveLength(4);    
     await user.click(nextLink);
 
     // Second page    
     const prevLink = await screen.findByText(/Prev/i);  
-    expect(screen.queryByText(photos2[0].author)).toBeInTheDocument();
-    expect(screen.queryByText(photos2[1].author)).toBeInTheDocument();
-    expect(screen.queryByText(photos2[2].author)).toBeInTheDocument();
+    expect(screen.queryByText(`by ${photos2[0].author}`)).toBeInTheDocument();
+    expect(screen.queryByText(`by ${photos2[1].author}`)).toBeInTheDocument();
+    expect(screen.queryByText(`by ${photos2[2].author}`)).toBeInTheDocument();
     expect(screen.queryAllByRole("img")).toHaveLength(4);
   });
 

@@ -1,0 +1,47 @@
+.gallery {
+  margin-top: -10vh;
+  margin-bottom: 10rem;
+}
+
+.gallery img {
+  width: 100%;
+  filter: grayscale(0.5);
+  position: relative;
+  transition: all .3s;  
+}
+
+.gallery img:hover{
+  filter: grayscale(0);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 50%);
+  transform: scale(1.15);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.gallery a {
+  text-decoration: none;
+  color: var(--black);
+  text-align: right;
+  font-weight: 600;
+  font-size: 12px;    
+}
+
+.gallery p {
+  margin: 0;
+}
+
+.pagination a{
+  margin: 0 var(--spacer-2);
+  font-size: 1rem;
+  padding: var(--spacer-2) var(--spacer-4);
+  color: var(--blue);
+  border: 3px solid var(--blue);
+  border-radius: 5rem;
+  transition: all .2s;
+}
+
+.pagination a:hover{
+  color: var(--black);
+  background: var(--green);
+  border-color: var(--green);
+}

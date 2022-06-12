@@ -5,6 +5,8 @@ import { useSearchParams } from "react-router-dom";
 import Skeleton from "./Skeleton";
 import Error from "../../components/Error";
 import Header from "../../components/Header";
+import Hero from "../../components/Hero/Hero";
+import styles from "./Gallery.module.css";
 
 export default function Gallery(){
   const [searchParams] = useSearchParams(),
@@ -20,21 +22,24 @@ export default function Gallery(){
   return(
     <>
       <Header/>
-      <h1>Gallery</h1>
-      {photos.map( ({id, author}) => (
-        <Link to={`/${id}`} key={id}>
-          <div>
-            <img src={`https://picsum.photos/id/${id}/200/300`} />
-            <p>{author}</p>
-          </div>
-        </Link>
-      ))}
-      <h1>
-        {prev && <Link to={`?page=${parseInt(page) - 1}`} >Prev</Link>}
-      </h1>
-      <h1>
-        {next && <Link to={`?page=${parseInt(page) + 1}`}>Next</Link>}
-      </h1>
+      <Hero/>
+      <div className={`container ${styles.gallery}`} >
+        <div className="grid" style={{"--row-gap": "2rem","--column-gap": "1rem"}}>
+          {photos.map( ({id, author}) => (
+            <div className="g-col-4" key={id}>
+              <Link to={`/${id}`}>
+                <img src={`https://picsum.photos/id/${id}/300/400`} />
+                <p>by {author}</p>
+              </Link>
+            </div>
+          ))}
+        </div>
+        
+        <div className={`flex justify-center m-4 ${styles.pagination}`}>
+          {prev && <Link to={`?page=${parseInt(page) - 1}`} >Prev</Link>}        
+          {next && <Link to={`?page=${parseInt(page) + 1}`}>Next</Link>}
+        </div>        
+      </div>      
     </>
   );
 }
