@@ -45,10 +45,12 @@ describe("As a user,", ()=>{
     renderWithRouter(<App />, history );
     
     const [ _, firstImage ] = await screen.findAllByRole("img");
-    await user.click(firstImage);    
-    expect(screen.getAllByRole("slider")).toHaveLength(3);
+    await user.click(firstImage);        
+    expect(screen.getByTestId("editable-image")).toHaveAttribute("src", `https://picsum.photos/id/${photos1[0].id}/600/400`);    
+    await waitFor(()=>{
+      expect(screen.getAllByRole("slider")).toHaveLength(3);
+    });
     expect(screen.getAllByRole("checkbox")).toHaveLength(1);
-    expect(screen.getByRole("img")).toHaveAttribute("src", `https://picsum.photos/id/${photos1[0].id}/600/400`);    
   });
   
   it("I want to be able to edit image that I can download",async ()=>{
@@ -60,7 +62,7 @@ describe("As a user,", ()=>{
     const [ _, firstImage ] = await screen.findAllByRole("img");
     await user.click(firstImage);    
     
-    const widthSlider = screen.getByLabelText("Width"),
+    const widthSlider = await screen.findByLabelText("Width"),
           heightSlider = screen.getByLabelText("Height"),
           blurSlider = screen.getByLabelText("Blur"),
           grayscaleCheck = screen.getByLabelText("Grayscale");
@@ -71,7 +73,7 @@ describe("As a user,", ()=>{
     await user.click(grayscaleCheck);
     
     await waitFor(()=>{
-      expect(screen.getByRole("img")).toHaveAttribute("src", `https://picsum.photos/id/${photos1[0].id}/900/800?grayscale&blur=3`);      
+      expect(screen.getByTestId("editable-image")).toHaveAttribute("src", `https://picsum.photos/id/${photos1[0].id}/900/800?grayscale&blur=3`);      
     });
   });
 });

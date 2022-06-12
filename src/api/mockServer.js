@@ -76,7 +76,10 @@ const handlers = [
   }),
   rest.get("https://picsum.photos/id/:id/info", (req, res, ctx)=>{    
     return res(
-      ctx.json({})
+      ctx.json({
+        width:  1000,
+        height: 1000,
+      })
     );
   })
 ];
